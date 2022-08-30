@@ -9,11 +9,11 @@ html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-image:url("/assets/book.jpg") ;
+    background-image:url("https://images6.alphacoders.com/310/310018.jpg") ;
 }
 
 header {
-    background-image:url("/assets/background.jpg") ;
+    background-image:url("https://images2.alphacoders.com/261/26102.jpg") ;
     padding: 16px;
     color: whitesmoke;
     font-style: bold;
