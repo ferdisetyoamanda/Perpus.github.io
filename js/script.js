@@ -24,8 +24,14 @@ function addTodo() {
   if (saveData()) {
     myFunction();
   }
-  
-  
+  kosong()
+}
+
+function kosong() {
+  const textJudul = document.getElementById('judul').value = "";
+  const textNama = document.getElementById('nama').value = "";
+  const timestamp = document.getElementById('date').value = "";
+
 }
 
 
@@ -47,6 +53,7 @@ const todos = [];
 const RENDER_EVENT = 'render-todo';
 document.addEventListener(RENDER_EVENT, function () {
   console.log(todos);
+  saveData();
 });
 
 function makeTodo(todoObject) {
@@ -76,7 +83,7 @@ function makeTodo(todoObject) {
     const undoButton = document.createElement('button');
     undoButton.classList.add('undo-button');
  
-    undoButton.addEventListener('click', function () {
+    undoButton.addEventListener('click', () => {
       undoTaskFromCompleted(todoObject.id);
     });
  
@@ -98,8 +105,15 @@ function makeTodo(todoObject) {
     checkButton.addEventListener('click', function () {
       addTaskToCompleted(todoObject.id);
     });
+
+    const trashButton = document.createElement('button');
+    trashButton.classList.add('trash-button');
+ 
+    trashButton.addEventListener('click', function () {
+      removeTaskFromCompleted(todoObject.id);
+    });
     
-    container.append(checkButton);
+    container.append(checkButton, trashButton);
   }
  
   return container;
@@ -129,6 +143,7 @@ function addTaskToCompleted (todoId) {
   todoTarget.isCompleted = true;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
+  myadd()
 
 }
 
@@ -149,6 +164,7 @@ function removeTaskFromCompleted(todoId) {
   todos.splice(todoTarget, 1);
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
+  alert("Berhasil Menghapus Data !");
 }
  
  
@@ -159,6 +175,7 @@ function undoTaskFromCompleted(todoId) {
  
   todoTarget.isCompleted = false;
   document.dispatchEvent(new Event(RENDER_EVENT));
+  mycheck();
 }
 
 function findTodoIndex(todoId) {
@@ -176,6 +193,7 @@ function saveData() {
     const parsed = JSON.stringify(todos);
     localStorage.setItem(STORAGE_KEY, parsed);
     document.dispatchEvent(new Event(SAVED_EVENT));
+    
   }
 }
 
@@ -218,6 +236,18 @@ function checkform() {
 }
 function myFunction() {
   var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+}
+
+function mycheck() {
+  var x = document.getElementById("checkdata");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+}
+
+function myadd() {
+  var x = document.getElementById("tambahdata");
   x.className = "show";
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
 }
